@@ -14,7 +14,6 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
 
     result = os.path.join(base_path, relative_path)
-    print(f"Resource Path: {result}")  # Debug-Ausgabe hinzufügen
     return result
 
 
@@ -63,7 +62,7 @@ def get_value(key:str, json_file_path: str):
             if key in data:
                 return data[key]
             else:
-                print(f'Der Schlüssel "{key}" wurde nicht in der JSON-Datei gefunden.')
+                pass
 
     except FileNotFoundError:
         print(f'Die Datei "{json_file_path}" wurde nicht gefunden.')
@@ -105,35 +104,30 @@ def start(startkey: str, stopkey: str, agent: str):
             if keyboard.is_pressed(startkey):  # if key 'q' is pressed 
                 while True:
                     pg.mouseDown(agent_pos[0], agent_pos[1], duration=0.1)
-                    sleep(0.2)
                     pg.mouseUp(agent_pos[0], agent_pos[1], duration=0.1)
-                    sleep(0.1)
                     
                     pg.mouseDown(button_pos[0], button_pos[1], duration=0.1)
-                    sleep(0.2)
+                    
                     pg.mouseUp(button_pos[0], button_pos[1], duration=0.1)
-                    sleep(0.1)
                     
                     try:  # used try so that if user pressed other than the given key error will not be shown
                         if keyboard.is_pressed(stopkey):  # if key 'q' is pressed 
                             break
                     except:
-                        print("Stop Key not pressed yet!")
+                        pass
         except:
-            print("Start Key not pressed yet!")
+            pass
 
 def add_value(agent: str, json_file_path: str, key: str = "q"):
     json_file_path = resource_path(json_file_path)
     while True:
         mousep = pg.position()
-        print(mousep)
         sleep(0.1)
         try:
             if keyboard.is_pressed(key):
                 update_value(agent, mousep, json_file_path)
                 return True  # Rückgabe, um anzuzeigen, dass die Aktualisierung erfolgreich war
         except:
-            print("Key not pressed yet!")
             return False  # Rückgabe, um anzuzeigen, dass ein Fehler aufgetreten ist
 
 def remove_agent(json_file_path):
@@ -146,9 +140,7 @@ def remove_agent(json_file_path):
         with open(json_file_path, 'w') as json_file:
             json.dump(json_data, json_file, indent=4)
 
-        print("All agents deleted successfully.")
     except FileNotFoundError:
         print(f"File '{json_file_path}' not found.")
     except Exception as e:
         print(f"An error occurred: {str(e)}")
-

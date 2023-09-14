@@ -1,8 +1,6 @@
 import customtkinter as ti
 from brain import *
-import os
 from time import sleep
-import concurrent.futures
 import threading
 
 
@@ -12,7 +10,7 @@ icon = resource_path(".vlocker\\icon.ico")
 agents = agents_list(agentsjson) # Get the names of the agents  
 
 def root():
-    print("building...")
+    print("root")
     ti.set_appearance_mode("dark")
     ti.set_default_color_theme("dark-blue")
     
@@ -52,7 +50,7 @@ def root():
     root.mainloop()
 
 def add_frame():
-    print("building...")
+    print("add_frame")
     ti.set_appearance_mode("dark")
     ti.set_default_color_theme("dark-blue")
 
@@ -75,7 +73,7 @@ def add_frame():
     
     root.mainloop()
 def add_explanation(agent, json_file_path):
-    print("building...")
+    print("add_explanation")
     ti.set_appearance_mode("dark")
     ti.set_default_color_theme("dark-blue")
 
