@@ -3,14 +3,14 @@ from brain import *
 from time import sleep
 import threading
 from selfupdate import update
+from PIL import Image
 
-update() # Checks for updates in the Github repo
 
 agents_json = resource_path(".vlocker\\agents.json")
 settings_json = resource_path(".vlocker\\settings.json")
 icon = resource_path(".vlocker\\icon.ico")
 agents = agents_list(agents_json) # Get the names of the agents 
-background_png = resource_path("background.jpg") # Hippity hoppity your picture is now my property
+background_image = resource_path(".vlocker\\background.jpg") # Hippity hoppity your picture is now my property
 
 def root():
     print("root")
@@ -22,15 +22,16 @@ def root():
     root.title("Valorant Instalocker")
     root.iconbitmap(icon)
 
-    background_image = ti.CTkImage(background_image)
-    background_label = ti.CTkLabel(root, image=background_image)
+    background = ti.CTkImage(Image.open(background_image), size=(450, 330))
+    background_label = ti.CTkLabel(root, text=None, image=background)
     background_label.place(x=0, y=0, relwidth=1, relheight=1)
+    
 
 
-    frame = ti.CTkFrame(root)
+    frame = ti.CTkFrame(root, corner_radius=20)
     frame.grid(row=1, column=1, padx=20, pady=20)
 
-    frame2 = ti.CTkFrame(root)
+    frame2 = ti.CTkFrame(root, corner_radius=20, )
     frame2.grid(row=1, column=2, padx=20, pady=20)
 
     entry1 = ti.CTkEntry(frame, placeholder_text="start key")
@@ -51,7 +52,7 @@ def root():
     label = ti.CTkLabel(frame2, text="made by Willi")
     label.grid(row=3, column=1, padx=25, pady=10)
 
-    button3 = ti.CTkButton(frame2, fg_color="red", text="reset everything", command=lambda: remove_agent(agents_json))
+    button3 = ti.CTkButton(frame2, fg_color="red", text="reset everything", command=lambda: reset_json(agents_json))
     button3.grid(row=4, column=1, padx=25, pady=20)
 
     root.mainloop()

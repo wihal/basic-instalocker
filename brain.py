@@ -110,7 +110,7 @@ def add_value(agent: str, json_file_path: str, key: str = "q"):
         except:
             return False  # Rückgabe, um anzuzeigen, dass ein Fehler aufgetreten ist
 
-def remove_agent(json_file_path):
+def reset_json(json_file_path):
     json_file_path = resource_path(json_file_path)
     try:
         # Create an empty dictionary to clear the JSON data
@@ -120,6 +120,20 @@ def remove_agent(json_file_path):
         with open(json_file_path, 'w') as json_file:
             json.dump(json_data, json_file, indent=4)
 
+    except FileNotFoundError:
+        print(f"File '{json_file_path}' not found.")
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
+        
+# Delete Valure
+def remove_value(agent: str, json_file_path: str):
+    json_file_path = resource_path(json_file_path)
+    try:
+        with open(json_file_path, "r") as file:
+            counter_data = json.load(file)
+        del counter_data[agent]
+        with open(json_file_path, "w") as file:
+            json.dump(counter_data, file)
     except FileNotFoundError:
         print(f"File '{json_file_path}' not found.")
     except Exception as e:
