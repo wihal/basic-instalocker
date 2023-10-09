@@ -2,12 +2,15 @@ import customtkinter as ti
 from brain import *
 from time import sleep
 import threading
+from selfupdate import update
 
+update() # Checks for updates in the Github repo
 
-agentsjson = resource_path(".vlocker\\agents.json")
-settingsjson = resource_path(".vlocker\\settings.json")
+agents_json = resource_path(".vlocker\\agents.json")
+settings_json = resource_path(".vlocker\\settings.json")
 icon = resource_path(".vlocker\\icon.ico")
-agents = agents_list(agentsjson) # Get the names of the agents  
+agents = agents_list(agents_json) # Get the names of the agents 
+background_png = resource_path("background.jpg") # Hippity hoppity your picture is now my property
 
 def root():
     print("root")
@@ -18,6 +21,10 @@ def root():
     root.geometry("450x330")
     root.title("Valorant Instalocker")
     root.iconbitmap(icon)
+
+    background_image = ti.CTkImage(background_image)
+    background_label = ti.CTkLabel(root, image=background_image)
+    background_label.place(x=0, y=0, relwidth=1, relheight=1)
 
 
     frame = ti.CTkFrame(root)
@@ -44,7 +51,7 @@ def root():
     label = ti.CTkLabel(frame2, text="made by Willi")
     label.grid(row=3, column=1, padx=25, pady=10)
 
-    button3 = ti.CTkButton(frame2, fg_color="red", text="reset everything", command=lambda: remove_agent(agentsjson))
+    button3 = ti.CTkButton(frame2, fg_color="red", text="reset everything", command=lambda: remove_agent(agents_json))
     button3.grid(row=4, column=1, padx=25, pady=20)
 
     root.mainloop()
@@ -65,10 +72,10 @@ def add_frame():
     entry = ti.CTkEntry(frame, placeholder_text="Enter Agentname")
     entry.grid(row=1, column=1, padx=25, pady=10)
     
-    button = ti.CTkButton(frame, text="add/update agent", command=lambda: add_explanation(entry.get(), agentsjson))
+    button = ti.CTkButton(frame, text="add/update agent", command=lambda: add_explanation(entry.get(), agents_json))
     button.grid(row=2, column=1, padx=25, pady=7)
 
-    button1 = ti.CTkButton(frame, fg_color="green", text="add button", command=lambda: add_explanation("Button", settingsjson))
+    button1 = ti.CTkButton(frame, fg_color="green", text="add button", command=lambda: add_explanation("Button", settings_json))
     button1.grid(row=3, column=1, padx=25, pady=7)
     
     root.mainloop()

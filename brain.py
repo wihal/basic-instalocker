@@ -6,7 +6,7 @@ from time import sleep
 import os
 import sys
 
-# Thanks Bro https://stackoverflow.com/a/31966932/16335953
+# Don't ask how this works, thanks Bro https://stackoverflow.com/a/31966932/16335953
 def resource_path(relative_path):
     try:
         base_path = sys._MEIPASS2
@@ -14,27 +14,7 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
 
     result = os.path.join(base_path, relative_path)
-    return result
-
-
-
-'''if not os.path.exists(f".vlocker"):
-    os.makedirs(f".vlocker")
-    print(f"Folder .vlocker created successfully.")
-else:
-    print(f"Folder .vlocker already exists.")
-
-def create_json(file_path, data=None):
-    file_path = resource_path(file_path)
-    if not os.path.exists(file_path):
-        with open(file_path, 'w') as json_file:
-            json.dump(data, json_file, indent=4)
-        print(f"JSON file '{file_path}' created.")
-    else:
-        print(f"JSON file '{file_path}' already exists. To update it, use a different function.")
-
-create_json(".vlocker\\agents.json")
-create_json(".vlocker\\settings.json")'''
+    return result 
 
 def agents_list(json_file_path: str):
     json_file_path = resource_path(json_file_path)
