@@ -1,57 +1,19 @@
-## Valorant Instalocker with GUI 💻
+## Valorant Instalocker with GUI 💻 [![Help - Server](https://img.shields.io/badge/Help-Server-white?logo=discord&logoColor=white)](https://discord.gg/HQN7HY7tgh) ![undetected - 09.10.2023](https://img.shields.io/badge/undetected-09.10.2023-brightgreen) [![Development State - Alpha](https://img.shields.io/badge/Development_State-Alpha-yellow?logo=github&logoColor=yellow)](https://github.com/wihal/valorant-instalocker-with-gui/releases) [![License: - MIT](https://img.shields.io/badge/License%3A-MIT-blue)](https://opensource.org/licenses/MIT)
 
-If you want to enhance your Valorant experience by Instalocking, you've come to the right place. Instalocking allows you to secure your preferred agent before anyone else in the lobby. Please note that Instalocking can sometimes be considered rude in the Valorant community. So use this technique responsibly and communicate with your team.
+You are mad because the opponent locked Reyna and just got 3 kill, then you are right here!
+- [What is instalocking?](https://github.com/wihal/valorant-instalocker-with-gui/tree/main#what-is-instalocking)
+- [Turoial](https://github.com/wihal/valorant-instalocker-with-gui/tree/main#tutorial)
+- [FAQ](https://github.com/wihal/valorant-instalocker-with-gui/tree/main#faq)
 
-## Table of Contents 
-
-1. **Introduction to Instalocking**
-   - What is Instalocking?
-   - When is Instalocking Appropriate?
-
-2. **How to Instalock**
-   - Tutorial
-   - Tips for a Successful Instalock
-
-3. **Risks and Considerations**
-   - Possible Consequences of Instalocking
-   - Alternatives to Instalocking
-
-4. **Security Note**
-   - [Important: Beware of False Positives](#important-beware-of-false-positives)
-
-## Introduction to Instalocking
-
-### What is Instalocking? 
-
-Instalocking is a practice in Valorant where a player selects their favourite agent as soon as possible when they enter a lobby. This is to ensure that you can play your favourite agent before anyone else has a chance to choose him. The programme automates this process.
-
-### When is Instalocking Appropriate?
-
-Instalocking can be appropriate when you are confident in your ability to contribute to the team's success with your chosen agent. However, it's essential to use good judgment and communicate with your teammates to maintain a positive gaming experience. 💛
-## How to Instalock
-
-### Tutorial 
-
+## Tutorial
 soon
 
-## Risks and Considerations
+## What is Instalocking?
+If you are on this site your properly know what is Instalocking but for people who dont know:
+> Instalocking is a practice in Valorant where a player selects their favourite Agent as soon as possible when they enter a lobby. This is to ensure that you can play your favourite agent before anyone else has a chance to select it. The program just automates this process.
 
-### Possible Consequences of Instalocking
+## FAQ
+- **Why is my antivirus blocking Agent Picker?**
+> the executable(.exe) version was compiled in a way that your antivirus doesn't like(?), but yes it is safe, you can review the source code and compile it yourself, you will get the same result. For more information about potential false positives in instalocking tools, refer to the wiki
+ [Virus Detection and False Positives](https://github.com/willi6392/valorant-instalocker-with-gui/wiki/Virus%3F).
 
-Instalocking can lead to team dissatisfaction if it disrupts team composition. Be prepared to switch agents if it benefits the team's strategy.
-
-### Alternatives to Instalocking ➡️
-
-Consider alternative strategies, such as having a pool of agents you are proficient with, to ensure team flexibility and cooperation.
-
-## Security Note 🔒
-
-### Important: Beware of False Positives
-
-When discussing instalocking, be cautious about any claims that your instalocking tools or scripts may trigger false positives from antivirus software. Always verify the legitimacy of such claims and use software responsibly.
-
-For more information about potential false positives in instalocking tools, refer to our wiki [Virus Detection and False Positives]([link-to-your-virus-text-guide](https://github.com/willi6392/valorant-instalocker-with-gui/wiki/Virus%3F)https://github.com/willi6392/valorant-instalocker-with-gui/wiki/Virus%3F).
-
-***
-
-written by chatGPT imagine writing by yourself XD
