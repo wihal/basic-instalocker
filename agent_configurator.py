@@ -1,83 +1,80 @@
-# Thanks ChatGPT
 import customtkinter as ti
 from brain import *
-from time import sleep
-import threading
 from selfupdate import update
+from time import sleep
 from PIL import Image, ImageTk
 
-class ValorantInstalockerApp:
-    def __init__(self):
-        self.agents_json = resource_path(".vlocker\\agents.json")
-        self.settings_json = resource_path(".vlocker\\settings.json")
-        self.icon = resource_path(".vlocker\\icon.ico")
+def create_agent_buttons(scrollframe, agents_json, settings_json):
+    current_row = 2
 
-        ti.set_appearance_mode("dark")
-        ti.set_default_color_theme("dark-blue")
+    label = ti.CTkLabel(scrollframe, text="Button")
+    label.grid(row=1, column=1, padx=25, pady=10)
 
-        self.root = ti.CTk()
-        self.root.geometry("450x330")
-        self.root.title("Valorant Instalocker")
-        self.root.iconbitmap(self.icon)
+    if get_value("Button", settings_json) != any:
+        button_text = "edit"
+        fg_color = "blue"
+    else:
+        button_text = "set"
+        fg_color = "red"
 
-        self.background_image = resource_path(".vlocker\\background.jpg")
-        self.asdf = ti.CTkImage(Image.open(self.background_image), size=(450, 330))
+    button = ti.CTkButton(scrollframe, fg_color=fg_color, compound=ti.LEFT, text=button_text,
+                          command=lambda: update_value("Button", settings_json), width=28, height=28)
+    button.grid(row=1, column=2, padx=10, pady=10)
 
-        self.background_label = ti.CTkLabel(self.root, text=None, image=self.asdf)
-        self.background_label.place(x=0, y=0, relwidth=1, relheight=1)
+    agents = agents_list(agents_json)
 
-        self.scrollframe = ti.CTkScrollableFrame(self.root, width=400)
-        self.scrollframe.grid(padx=20, pady=20)
+    for agent in agents:
+        label = ti.CTkLabel(scrollframe, text=agent)
+        label.grid(row=current_row, column=1, padx=25, pady=10)
 
-    def create_agent_buttons(self):
-        current_row = 2
+        def remove_agent(a=agent):
+            remove_value(a, agents_json)
+            refresh_scrollframe(scrollframe, agents_json, settings_json)
 
-        label = ti.CTkLabel(self.scrollframe, text="Button")
-        label.grid(row=1, column=1, padx=25, pady=10)
+        button_remove = ti.CTkButton(scrollframe, fg_color="red", command=remove_agent,
+                                     compound=ti.LEFT, text="❌", width=28, height=28)
+        button_remove.grid(row=current_row, column=3, padx=10, pady=10)
 
-        if get_value("Button", self.settings_json) != any:
-            button_text = "edit"
-            fg_color = "blue"
-        else:
-            button_text = "set"
-            fg_color = "red"
+        def update_agent(a=agent):
+            update_value(agents_json, a)
 
-        button = ti.CTkButton(self.scrollframe, fg_color=fg_color, compound=ti.LEFT, text=button_text,
-                              command=lambda: update_value("Button", self.settings_json), width=28, height=28)
-        button.grid(row=1, column=2, padx=10, pady=10)
+        button_update = ti.CTkButton(scrollframe, fg_color="blue", compound=ti.LEFT, text="Update",
+                                     command=update_agent, width=28, height=28)
+        button_update.grid(row=current_row, column=2, padx=10, pady=10)
 
-        for agent in agents_list(self.agents_json):
-            label = ti.CTkLabel(self.scrollframe, text=agent)
-            label.grid(row=current_row, column=1, padx=25, pady=10)
+        current_row += 1
 
-            def remove_agent(a=agent):
-                remove_value(a, self.agents_json)
-                self.refresh_scrollframe()
-                self.root.update_idletasks()
+def refresh_scrollframe(scrollframe, agents_json, settings_json):
+    for widget in scrollframe.winfo_children():
+        widget.destroy()
 
-            button_remove = ti.CTkButton(self.scrollframe, fg_color="red", command=remove_agent,
-                                         compound=ti.LEFT, text="❌", width=28, height=28)
-            button_remove.grid(row=current_row, column=3, padx=10, pady=10)
+    create_agent_buttons(scrollframe, agents_json, settings_json)
 
-            def update_agent(a=agent):
-                update_value(self.agents_json, a)
+def main():
+    agents_json = resource_path(".vlocker\\agents.json")
+    settings_json = resource_path(".vlocker\\settings.json")
+    icon = resource_path(".vlocker\\icon.ico")
 
-            button_update = ti.CTkButton(self.scrollframe, fg_color="blue", compound=ti.LEFT, text="Update",
-                                         command=update_agent, width=28, height=28)
-            button_update.grid(row=current_row, column=2, padx=10, pady=10)
+    ti.set_appearance_mode("dark")
+    ti.set_default_color_theme("dark-blue")
 
-            current_row += 1
+    root = ti.CTk()
+    root.geometry("450x330")
+    root.title("Valorant Instalocker")
+    root.iconbitmap(icon)
 
-    def refresh_scrollframe(self):
-        for widget in self.scrollframe.winfo_children():
-            widget.destroy()
+    background_image = resource_path(".vlocker\\background.jpg")
+    asdf = ti.CTkImage(Image.open(background_image), size=(450, 330))
 
-        self.create_agent_buttons()
+    background_label = ti.CTkLabel(root, text=None, image=asdf)
+    background_label.place(x=0, y=0, relwidth=1, relheight=1)
 
-    def main(self):
-        self.create_agent_buttons()
-        self.root.mainloop()
+    scrollframe = ti.CTkScrollableFrame(root, width=400)
+    scrollframe.grid(padx=20, pady=20)
+
+    create_agent_buttons(scrollframe, agents_json, settings_json)
+
+    root.mainloop()
 
 if __name__ == "__main__":
-    app = ValorantInstalockerApp()
-    app.main()
+    main()
