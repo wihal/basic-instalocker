@@ -16,11 +16,11 @@ def resource_path(relative_path):
     result = os.path.join(base_path, relative_path)
     return result 
 
-def agents_list(json_file_path: str):
-    json_file_path = resource_path(json_file_path)
+def agents_list(path: str):
+    path = resource_path(path)
     object_names = []  # Erstelle eine leere Liste für die Namen der Objekte
 
-    with open(json_file_path, 'r') as json_file:
+    with open(path, 'r') as json_file:
         data = json.load(json_file)
 
         if isinstance(data, list):
@@ -32,43 +32,43 @@ def agents_list(json_file_path: str):
 
     return object_names
 
-def get_value(key:str, json_file_path: str):
-    json_file_path = resource_path(json_file_path)
+def get_value(item:str, path: str):
+    path = resource_path(path)
     try:
-        with open(json_file_path, 'r') as json_file:
+        with open(path, 'r') as json_file:
             data = json.load(json_file)
 
             # Überprüfe, ob der Schlüssel (key) in den JSON-Daten existiert
-            if key in data:
-                return data[key]
+            if item in data:
+                return data[item]
             else:
                 pass
 
     except FileNotFoundError:
-        print(f'Die Datei "{json_file_path}" wurde nicht gefunden.')
+        print(f'Die Datei "{path}" wurde nicht gefunden.')
     except json.JSONDecodeError:
-        print(f'Die Datei "{json_file_path}" ist keine gültige JSON-Datei.')
+        print(f'Die Datei "{path}" ist keine gültige JSON-Datei.')
 
-def update_value(key, new_value, json_file_path: str):
-    json_file_path = resource_path(json_file_path)
+def update_item(item: str, value, path: str):
+    path = resource_path(path)
     try:
         # Open the JSON file for reading
-        with open(json_file_path, 'r') as file:
+        with open(path, 'r') as file:
             data = json.load(file)
 
         # Update the value for the specified key
-        data[key] = new_value
+        data[item] = value
 
         # Open the JSON file for writing
-        with open(json_file_path, 'w') as file:
+        with open(path, 'w') as file:
             json.dump(data, file, indent=4)
         
-        print(f"Updated '{key}' to '{new_value}' in {json_file_path}")
+        print(f"Updated '{item}' to '{value}' in {path}")
     
     except FileNotFoundError:
-        print(f"Error: {json_file_path} not found.")
+        print(f"Error: {path} not found.")
     except json.JSONDecodeError:
-        print(f"Error: Invalid JSON in {json_file_path}")
+        print(f"Error: Invalid JSON in {path}")
     except Exception as e:
         print(f"An error occurred: {e}")
 
@@ -98,43 +98,43 @@ def start(startkey: str, stopkey: str, agent: str):
         except:
             pass
 
-def add_value(agent: str, json_file_path: str, key: str = "q"):
+def add_item(agent: str, json_file_path: str, key: str = "q"):
     json_file_path = resource_path(json_file_path)
     while True:
         mousep = pg.position()
         sleep(0.1)
         try:
             if keyboard.is_pressed(key):
-                update_value(agent, mousep, json_file_path)
+                update_item(agent, mousep, json_file_path)
                 return True  # Rückgabe, um anzuzeigen, dass die Aktualisierung erfolgreich war
         except:
             return False  # Rückgabe, um anzuzeigen, dass ein Fehler aufgetreten ist
 
-def reset_json(json_file_path):
-    json_file_path = resource_path(json_file_path)
+def reset_json(path: str):
+    path = resource_path(path)
     try:
         # Create an empty dictionary to clear the JSON data
         json_data = {}
 
         # Save the empty data back to the file
-        with open(json_file_path, 'w') as json_file:
+        with open(path, 'w') as json_file:
             json.dump(json_data, json_file, indent=4)
 
     except FileNotFoundError:
-        print(f"File '{json_file_path}' not found.")
+        print(f"File '{path}' not found.")
     except Exception as e:
         print(f"An error occurred: {str(e)}")
         
 # Delete Valure
-def remove_value(agent: str, json_file_path: str):
-    json_file_path = resource_path(json_file_path)
+def remove_item(agent: str, path: str):
+    path = resource_path(path)
     try:
-        with open(json_file_path, "r") as file:
+        with open(path, "r") as file:
             counter_data = json.load(file)
         del counter_data[agent]
-        with open(json_file_path, "w") as file:
+        with open(path, "w") as file:
             json.dump(counter_data, file)
     except FileNotFoundError:
-        print(f"File '{json_file_path}' not found.")
+        print(f"File '{path}' not found.")
     except Exception as e:
         print(f"An error occurred: {str(e)}")
