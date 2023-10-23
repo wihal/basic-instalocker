@@ -15,7 +15,8 @@ pyinstaller_command = [
     "--icon", icon,
     "--distpath", output_folder,
     '--name', 'Vlocker',
-    '--add-data', "C:/Users/willi/Desktop/valo/brain.py;."
+    '--add-data', "C:/Users/willi/Desktop/valo/brain.py;.",
+    '--add-data', "C:/Users/willi/Desktop/valo/agent_manager.py;."
 ]
 
 # Führe PyInstaller aus

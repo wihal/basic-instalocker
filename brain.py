@@ -6,10 +6,10 @@ from time import sleep
 import os
 import sys
 
-# Don't ask how this works, thanks Bro https://stackoverflow.com/a/31966932/16335953
+# Funktioniert einfach keine ahnung wie. Danke Bro https://stackoverflow.com/a/31966932/16335953
 def resource_path(relative_path):
     try:
-        base_path = sys._MEIPASS2
+        base_path = sys._MEIPASS2 # Noch nie davon gehört
     except Exception:
         base_path = os.path.abspath(".")
 
@@ -52,14 +52,11 @@ def get_value(item:str, path: str):
 def update_item(item: str, value, path: str):
     path = resource_path(path)
     try:
-        # Open the JSON file for reading
         with open(path, 'r') as file:
             data = json.load(file)
 
-        # Update the value for the specified key
         data[item] = value
 
-        # Open the JSON file for writing
         with open(path, 'w') as file:
             json.dump(data, file, indent=4)
         
@@ -80,8 +77,8 @@ def start(startkey: str, stopkey: str, agent: str):
     print("StartKey: "+ startkey + "\n StopKey: " + stopkey + "\n Agent: " + agent)
     
     while True:
-        try:  # used try so that if user pressed other than the given key error will not be shown
-            if keyboard.is_pressed(startkey):  # if key 'q' is pressed 
+        try: 
+            if keyboard.is_pressed(startkey):
                 while True:
                     pg.mouseDown(agent_pos[0], agent_pos[1], duration=0.1)
                     pg.mouseUp(agent_pos[0], agent_pos[1], duration=0.1)
@@ -90,9 +87,9 @@ def start(startkey: str, stopkey: str, agent: str):
                     
                     pg.mouseUp(button_pos[0], button_pos[1], duration=0.1)
                     
-                    try:  # used try so that if user pressed other than the given key error will not be shown
-                        if keyboard.is_pressed(stopkey):  # if key 'q' is pressed 
-                            break
+                    try: 
+                        if keyboard.is_pressed(stopkey):
+                            return True
                     except:
                         pass
         except:
@@ -113,10 +110,9 @@ def add_item(agent: str, json_file_path: str, key: str = "q"):
 def reset_json(path: str):
     path = resource_path(path)
     try:
-        # Create an empty dictionary to clear the JSON data
+        # leere JSON-Datei erstellen
         json_data = {}
 
-        # Save the empty data back to the file
         with open(path, 'w') as json_file:
             json.dump(json_data, json_file, indent=4)
 
@@ -125,7 +121,7 @@ def reset_json(path: str):
     except Exception as e:
         print(f"An error occurred: {str(e)}")
         
-# Delete Valure
+# Löscht ein JSON object
 def remove_item(agent: str, path: str):
     path = resource_path(path)
     try:

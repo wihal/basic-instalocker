@@ -23,7 +23,8 @@ def create_agent_buttons(scrollframe, agents_json, settings_json):
         fg_color = "red"
 
     button = ti.CTkButton(scrollframe, fg_color=fg_color, compound=ti.LEFT, text=button_text,
-                          command=lambda: update_item("Button", settings_json), width=28, height=28)
+            command=lambda: edit_item("Button", settings_json, scrollframe), width=28, height=28)
+
     button.grid(row=1, column=2, padx=10, pady=10)
 
     agents = agents_list(agents_json)
@@ -43,8 +44,9 @@ def create_agent_buttons(scrollframe, agents_json, settings_json):
         def update_agent(a=agent):
             update_item(agents_json, a)
 
-        button_update = ti.CTkButton(scrollframe, fg_color="blue", compound=ti.LEFT, text="Update",
-                                     command=update_agent, width=28, height=28)
+        button_update = ti.CTkButton(scrollframe, fg_color="blue", compound=ti.LEFT, text="Update", 
+                command=lambda a=agent: edit_item(a, agents_json, scrollframe), width=28, height=28)
+
         button_update.grid(row=current_row, column=2, padx=10, pady=10)
 
         current_row += 1
@@ -56,16 +58,14 @@ def refresh_scrollframe(scrollframe, agents_json, settings_json):
     create_agent_buttons(scrollframe, agents_json, settings_json)
 
 def agent_manager():
-    agents_json = resource_path(".vlocker\\agents.json")
-    settings_json = resource_path(".vlocker\\settings.json")
-    icon = resource_path(".vlocker\\icon.ico")
+    
 
     ti.set_appearance_mode("dark")
     ti.set_default_color_theme("dark-blue")
 
     root = ti.CTkToplevel()
-    root.geometry("450x330")
-    root.title("Valorant Instalocker")
+    root.geometry("450x320")
+    root.title("Manage Agents")
     root.iconbitmap(icon)
     root.resizable(False, False)
     root.attributes('-topmost', 1)
@@ -113,7 +113,7 @@ def edit_item(item, json_file_path, scrollframe):
     frame = ti.CTkFrame(root)
     frame.grid(row=1, column=1, padx=20, pady=20)
 
-    label = ti.CTkLabel(frame, text=f"hover over {item} and then \n press q. Restart the Software after")
+    label = ti.CTkLabel(frame, text=f"hover over {item} and then \n press q.")
     label.grid(row=1, column=1, padx=25, pady=7)
 
     button = ti.CTkButton(frame, text="ok", command=lambda: root.attributes('-topmost', 0))

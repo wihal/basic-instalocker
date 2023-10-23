@@ -7,8 +7,8 @@ from brain import *
 agents_json = resource_path(".vlocker\\agents.json")
 settings_json = resource_path(".vlocker\\settings.json")
 icon = resource_path(".vlocker\\icon.ico")
-agents = agents_list(agents_json) # Get the names of the agents 
-background_image = resource_path(".vlocker\\background.jpg") # Hippity hoppity your picture is now my property
+agents = agents_list(agents_json) # Bekommt eine Liste aller agenten 
+background_image = resource_path(".vlocker\\background.jpg") # Hippity hoppity your picture is now my property thx to reddit guy
 color_theme = resource_path(".vlocker\\themes\\red_theme.json")
 
 def root():
@@ -20,7 +20,7 @@ def root():
     
     root = ti.CTk()
     root.geometry("450x330")
-    root.title("Valorant Instalocker")
+    root.title("Instalocker")
     root.iconbitmap(icon)
     root.resizable(False, False)
 
@@ -46,7 +46,13 @@ def root():
     button = ti.CTkButton(frame, text="manage agents", command=lambda: agent_manager())
     button.grid(row=6, column=1, padx=25, pady=20)
 
-    button = ti.CTkButton(frame2, text="Start", command=lambda: start(entry1.get(), entry2.get(), drop.get()))
+    def start_instalock(): # Fix das es nicht abstürtzt nachdem der instalock fertig ist
+        while True:
+            result = start(entry1.get(), entry2.get(), drop.get())
+            if result:
+                break
+
+    button = ti.CTkButton(frame2, text="Start", command=lambda: start_instalock())
     button.grid(row=2, column=1, padx=25, pady=7)
 
     label = ti.CTkLabel(frame2, text="made by Willi")
