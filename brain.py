@@ -5,6 +5,8 @@ import keyboard
 from time import sleep
 import os
 import sys
+import argparse
+
 
 # Funktioniert einfach keine ahnung wie. Danke Bro https://stackoverflow.com/a/31966932/16335953
 def resource_path(relative_path):
@@ -70,21 +72,24 @@ def update_item(item: str, value, path: str):
         print(f"An error occurred: {e}")
 
 
-def start(startkey: str, stopkey: str, agent: str):
+def start(startkey, stopkey: str, agent: str, autostart: bool = False):
+
+    if not startkey:
+        autostart = True
 
     agent_pos = get_value(agent, ".vlocker\\agents.json")
     button_pos = get_value("Button", ".vlocker\\settings.json")
-    print("StartKey: "+ startkey + "\n StopKey: " + stopkey + "\n Agent: " + agent)
-    
+
+    print("StartKey:", startkey, "\n StopKey:", stopkey, "\n Agent:", agent, "\n Autostart:", autostart)
+
     while True:
         try: 
-            if keyboard.is_pressed(startkey):
+            if autostart or keyboard.is_pressed(startkey):
                 while True:
                     pg.mouseDown(agent_pos[0], agent_pos[1], duration=0.1)
                     pg.mouseUp(agent_pos[0], agent_pos[1], duration=0.1)
                     
                     pg.mouseDown(button_pos[0], button_pos[1], duration=0.1)
-                    
                     pg.mouseUp(button_pos[0], button_pos[1], duration=0.1)
                     
                     try: 
@@ -134,3 +139,14 @@ def remove_item(agent: str, path: str):
         print(f"File '{path}' not found.")
     except Exception as e:
         print(f"An error occurred: {str(e)}")
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='VLocker CMD')
+
+    parser.add_argument('--startkey', '-sa', type=str, help='Sets the start key (not required)')
+    parser.add_argument('--stopkey', '-so', type=str, help='Sets the stop key (required to stop the program)', required=True)
+    parser.add_argument('--agent', '-a', type=str, help='Tells the Programm which agent to use', required=True)
+    parser.add_argument('--autostart', '-as', action='store_true', help='It is automaticly activated if no start key is given')
+
+    args = parser.parse_args()
+    start(args.startkey, args.stopkey, args.agent, args.autostart)
