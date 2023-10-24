@@ -2,9 +2,9 @@ import subprocess
 
 # This code is for automating the pyinstaller process
 pyinstaller_path = r"C:\Users\willi\AppData\Roaming\Python\Python311\Scripts\pyinstaller.exe"
-main_script = r"C:\Users\willi\Desktop\valo\main.pyw"
-output_folder = r"C:\Users\willi\Desktop\valo\output"
-icon = r"C:\Users\willi\Desktop\valo\.vlocker\icon.ico"
+main_script = r"C:\Users\willi\Desktop\VLocker\main.pyw"
+output_folder = r"C:\Users\willi\Desktop\VLocker\output"
+icon = r"C:\Users\willi\Desktop\VLocker\.vlocker\icon.ico"
 
 pyinstaller_command = [
     pyinstaller_path,
@@ -15,8 +15,8 @@ pyinstaller_command = [
     "--icon", icon,
     "--distpath", output_folder,
     '--name', 'Vlocker',
-    '--add-data', "C:/Users/willi/Desktop/valo/brain.py;.",
-    '--add-data', "C:/Users/willi/Desktop/valo/agent_manager.py;."
+    '--add-data', "C:/Users/willi/Desktop/VLocker/brain.py;.",
+    '--add-data', "C:/Users/willi/Desktop/VLocker/agent_manager.py;."
 ]
 
 subprocess.run(pyinstaller_command)
