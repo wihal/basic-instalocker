@@ -1,5 +1,4 @@
 import customtkinter as ti
-import threading
 from PIL import Image
 from agent_manager import *
 from brain import *
@@ -46,14 +45,18 @@ def root():
     button = ti.CTkButton(frame, text="manage agents", command=lambda: agent_manager())
     button.grid(row=6, column=1, padx=25, pady=20)
 
-    def start_instalock(): # Fix das es nicht abstürtzt nachdem der instalock fertig ist
+    def start_instalock():
+        start_button.configure(state=ti.DISABLED, text="waiting...", bg_color="red", hover_color="grey")  # Deaktiviere den Start-Button während des Installationsvorgangs
+        
         while True:
-            result = start(entry1.get(), entry2.get(), drop.get())
+            result = start(startkey=entry1.get(), stopkey=entry2.get(), agent=drop.get(), autostart=False)
             if result:
+                start_button.configure(state=ti.NORMAL, text="start", bg_color="green", hover_color="green")  # Aktiviere den Start-Button nach Abschluss der Installation
                 break
 
-    button = ti.CTkButton(frame2, text="Start", command=lambda: start_instalock())
-    button.grid(row=2, column=1, padx=25, pady=7)
+
+    start_button = ti.CTkButton(frame2, text="start", bg_color="green" ,command=lambda: start_instalock())
+    start_button.grid(row=2, column=1, padx=25, pady=7)
 
     label = ti.CTkLabel(frame2, text="made by Willi")
     label.grid(row=3, column=1, padx=25, pady=10)

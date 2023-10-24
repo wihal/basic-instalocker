@@ -72,14 +72,18 @@ def update_item(item: str, value, path: str):
         print(f"An error occurred: {e}")
 
 
-def start(startkey, stopkey: str, agent: str, autostart: bool = False):
+def start(startkey, agent: str, stopkey, autostart=False):
 
     if not startkey:
         autostart = True
+        
+    # Stellt sicher das der stopkey nicht leer ist
+    if not stopkey:
+        stopkey = "q"
 
     agent_pos = get_value(agent, ".vlocker\\agents.json")
     button_pos = get_value("Button", ".vlocker\\settings.json")
-
+    
     print("StartKey:", startkey, "\n StopKey:", stopkey, "\n Agent:", agent, "\n Autostart:", autostart)
 
     while True:
@@ -149,4 +153,4 @@ if __name__ == "__main__":
     parser.add_argument('--autostart', '-as', action='store_true', help='It is automaticly activated if no start key is given')
 
     args = parser.parse_args()
-    start(args.startkey, args.stopkey, args.agent, args.autostart)
+    start(startkey=args.startkey, stopkey=args.stopkey, agent=args.agent, autostart=args.autostart)

@@ -1,6 +1,6 @@
 import subprocess
-import os
 
+# This code is for automating the pyinstaller process
 pyinstaller_path = r"C:\Users\willi\AppData\Roaming\Python\Python311\Scripts\pyinstaller.exe"
 main_script = r"C:\Users\willi\Desktop\valo\main.pyw"
 output_folder = r"C:\Users\willi\Desktop\valo\output"
@@ -19,8 +19,6 @@ pyinstaller_command = [
     '--add-data', "C:/Users/willi/Desktop/valo/agent_manager.py;."
 ]
 
-# Führe PyInstaller aus
 subprocess.run(pyinstaller_command)
 
-# Erstellt den Installer
 subprocess.run(r'"C:\Program Files (x86)\Inno Setup 6\Compil32.exe" Installer.iss', shell=True)

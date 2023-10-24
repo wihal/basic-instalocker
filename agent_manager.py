@@ -65,8 +65,8 @@ def agent_manager():
 
     root = ti.CTkToplevel()
     root.geometry("450x320")
-    root.title("Manage Agents")
     root.iconbitmap(icon)
+    root.title("Manage Agents")
     root.resizable(False, False)
     root.attributes('-topmost', 1)
 
@@ -98,7 +98,7 @@ def edit_item(item, json_file_path, scrollframe):
 
     root = ti.CTkToplevel()
     root.geometry("280x150")
-    root.title("Add")
+    root.title("add/edit agent")
     root.iconbitmap(icon)
     root.resizable(False, False)
     root.attributes('-topmost', 2)
@@ -122,3 +122,6 @@ def edit_item(item, json_file_path, scrollframe):
     threading.Thread(target=asdf, args=(item, json_file_path)).start()
     
     root.mainloop()
+
+if __name__ == "__main__":
+    agent_manager()
