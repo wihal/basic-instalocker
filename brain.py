@@ -91,9 +91,11 @@ def start(startkey, agent: str, stopkey, autostart=False):
             if autostart or keyboard.is_pressed(startkey):
                 while True:
                     pg.mouseDown(agent_pos[0], agent_pos[1], duration=0.1)
+                    sleep(0.1)
                     pg.mouseUp(agent_pos[0], agent_pos[1], duration=0.1)
                     
                     pg.mouseDown(button_pos[0], button_pos[1], duration=0.1)
+                    sleep(0.1)
                     pg.mouseUp(button_pos[0], button_pos[1], duration=0.1)
                     
                     try: 
@@ -147,10 +149,10 @@ def remove_item(agent: str, path: str):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='VLocker CMD')
 
-    parser.add_argument('--startkey', '-sa', type=str, help='Sets the start key (not required)')
-    parser.add_argument('--stopkey', '-so', type=str, help='Sets the stop key (required to stop the program)', required=True)
-    parser.add_argument('--agent', '-a', type=str, help='Tells the Programm which agent to use', required=True)
-    parser.add_argument('--autostart', '-as', action='store_true', help='It is automaticly activated if no start key is given')
+    parser.add_argument('-startkey', '-sa', type=str, help='Sets the start key (not required)')
+    parser.add_argument('-stopkey', '-so', type=str, help='Sets the stop key (required to stop the program)', required=True)
+    parser.add_argument('-agent', '-a', type=str, help='Tells the Programm which agent to use', required=True)
+    parser.add_argument('-autostart', '-as', action='store_true', help='It is automaticly activated if no start key is given')
 
     args = parser.parse_args()
     start(startkey=args.startkey, stopkey=args.stopkey, agent=args.agent, autostart=args.autostart)

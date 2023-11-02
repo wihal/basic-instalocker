@@ -1,8 +1,6 @@
 import customtkinter as ti
 from brain import *
-from selfupdate import update
-from time import sleep
-from PIL import Image, ImageTk
+from PIL import Image
 import threading
 
 agents_json = resource_path(".vlocker\\agents.json")
@@ -41,13 +39,14 @@ def create_agent_buttons(scrollframe, agents_json, settings_json):
                                      compound=ti.LEFT, text="❌", width=28, height=28)
         button_remove.grid(row=current_row, column=3, padx=10, pady=10)
 
-        def update_agent(a=agent):
-            update_item(agents_json, a)
-
         button_update = ti.CTkButton(scrollframe, fg_color="blue", compound=ti.LEFT, text="Update", 
                 command=lambda a=agent: edit_item(a, agents_json, scrollframe), width=28, height=28)
-
         button_update.grid(row=current_row, column=2, padx=10, pady=10)
+
+        agent_pos = get_value(agent, agents_json)
+
+        label_position = ti.CTkLabel(scrollframe, text=f"{agent_pos[0]}, {agent_pos[1]}")
+        label_position.grid(row=current_row, column=4, padx=10, pady=10)
 
         current_row += 1
 
@@ -97,7 +96,7 @@ def edit_item(item, json_file_path, scrollframe):
     ti.set_default_color_theme("dark-blue")
 
     root = ti.CTkToplevel()
-    root.geometry("280x150")
+    root.geometry("240x150")
     root.title("add/edit agent")
     root.iconbitmap(icon)
     root.resizable(False, False)
@@ -114,10 +113,10 @@ def edit_item(item, json_file_path, scrollframe):
     frame.grid(row=1, column=1, padx=20, pady=20)
 
     label = ti.CTkLabel(frame, text=f"hover over {item} and then \n press q.")
-    label.grid(row=1, column=1, padx=25, pady=7)
+    label.grid(row=1, column=1, padx=25, pady=25)
 
     button = ti.CTkButton(frame, text="ok", command=lambda: root.attributes('-topmost', 0))
-    button.grid(row=2, column=1, padx=25, pady=20)
+    button.grid(row=2, column=1, padx=25, pady=7)
 
     threading.Thread(target=asdf, args=(item, json_file_path)).start()
     
