@@ -97,7 +97,7 @@ def edit_item(item, json_file_path, scrollframe):
 
     root = ti.CTkToplevel()
     root.geometry("240x150")
-    root.title("add/edit agent")
+    root.title("add/edit " + item)
     root.iconbitmap(icon)
     root.resizable(False, False)
     root.attributes('-topmost', 2)
@@ -107,7 +107,6 @@ def edit_item(item, json_file_path, scrollframe):
         refresh_scrollframe(scrollframe, agents_json, settings_json)
         if result:
             root.destroy()
-
 
     frame = ti.CTkFrame(root)
     frame.grid(row=1, column=1, padx=20, pady=20)

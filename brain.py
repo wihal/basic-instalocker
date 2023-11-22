@@ -73,7 +73,7 @@ def update_item(item: str, value, path: str):
 
 
 def start(startkey, agent: str, stopkey, autostart=False):
-
+    
     if not startkey:
         autostart = True
         
@@ -149,8 +149,8 @@ def remove_item(agent: str, path: str):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='VLocker CMD')
 
-    parser.add_argument('-startkey', '-sa', type=str, help='Sets the start key (not required)')
-    parser.add_argument('-stopkey', '-so', type=str, help='Sets the stop key (required to stop the program)', required=True)
+    parser.add_argument('-startkey', '-sa','-startk', type=str, help='Sets the start key (not required)')
+    parser.add_argument('-stopkey', '-so','-stopk', type=str, help='Sets the stop key (required to stop the program)', required=True)
     parser.add_argument('-agent', '-a', type=str, help='Tells the Programm which agent to use', required=True)
     parser.add_argument('-autostart', '-as', action='store_true', help='It is automaticly activated if no start key is given')
 
