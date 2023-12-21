@@ -46,8 +46,7 @@ To add new agents use add menu by running main.py
 
 ## Build 🔨
 soon requirements.txt
-- **Can I get banned for using a Instalocker?**
-> It is **unlikely** to get banned by using an instalocker, because the instalocker doesn't read the game memory or make changes to the game files, and it doesn't abuse the Valorant API. **I do not guarantee that it will not get banned!**
+
 ----
 
 Valorant is a registered trademark of Riot Games, Inc. and is in no way affiliated with, associated with, or endorsed by Riot Games, Inc.
