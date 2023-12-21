@@ -46,16 +46,6 @@ To add new agents use add menu by running main.py
 
 ## Build 🔨
 soon requirements.txt
-
-## FAQ 🔍
-- **What is Instalocking?**
-If you are on this site your properly know what is Instalocking but for people who dont know:
-> Instalocking is a practice in Valorant where a player selects their favourite Agent as soon as possible when they enter a lobby. This is to ensure that you can play your favourite agent before anyone else has a chance to select it. The program just automates this process.
-
-- **Why is my antivirus blocking Agent Picker?**
-> **It's safe**, the computer may think its a virus because the program is access your mouse to instalock not like another instalocker which are access the client api like [this project from @deadly](https://github.com/deadly/valorant-agent-yoinker), it a you can check the source code and compile it yourself, you will get the same result.  For more information about potential false positives in instalocking tools, see the wiki
- [Virus Detection and False Positives](https://github.com/willi6392/valorant-instalocker-with-gui/wiki/Virus%3F).
-
 - **Can I get banned for using a Instalocker?**
 > It is **unlikely** to get banned by using an instalocker, because the instalocker doesn't read the game memory or make changes to the game files, and it doesn't abuse the Valorant API. **I do not guarantee that it will not get banned!**
 ----
